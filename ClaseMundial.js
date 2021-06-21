@@ -98,23 +98,18 @@ export default class Mundial {
     return Math.round((Math.random() * 10))
   }
   jugar(partido) {
-    const golesLocal = this.generarGoles()
-    const golesVisitante = this.generarGoles()
-    if (golesLocal === golesVisitante) {
-      console.log('Antes de jugar otra vez', `${golesLocal} Local VS ${golesVisitante} Visitante`)
-      this.jugarOtraVez(partido, golesLocal, golesVisitante)
+    let golesLocal = this.generarGoles()
+    let golesVisitante = this.generarGoles()
+
+    while (golesLocal === golesVisitante) {
+      golesVisitante = this.generarGoles()
     }
+
     return {
       equipoLocal: partido[0].nombre,
       golesLocal,
       equipoVisitante: partido[1].nombre,
       golesVisitante,
-    }
-  }
-  jugarOtraVez(partido, golesLocal, golesVisitante) {
-    while (golesLocal === golesVisitante) {
-      this.jugar(partido)
-      break
     }
   }
   obtenerEquipoPorNombre(nombre) {
@@ -124,9 +119,8 @@ export default class Mundial {
     let ganador;
     const equipoLocal = this.obtenerEquipoPorNombre(resultado.equipoLocal)
     const equipoVisitante = this.obtenerEquipoPorNombre(resultado.equipoVisitante)
-    console.log('ANTES DEL IF', resultado)
 
-    if(resultado.equipoLocal > resultado.equipoVisitante) {
+    if(resultado.golesLocal > resultado.golesVisitante) {
       equipoLocal.partidoGanado = true
       ganador = resultado.equipoLocal
     } else {
@@ -134,8 +128,6 @@ export default class Mundial {
       ganador = resultado.equipoVisitante
     }
     resultado = {...resultado, ganador}
-    console.log('ESTE ES EL GANADOR', resultado)
-
     return resultado
   }
   nuevaFase () {

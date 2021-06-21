@@ -1,7 +1,7 @@
 {
-  "name": "m",
+  "name": "practica3_mundial",
   "version": "1.0.0",
-  "description": "#",
+  "description": "Simulador del mundial de futbol",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
